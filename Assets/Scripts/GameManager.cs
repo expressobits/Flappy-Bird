@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    private AudioSource audioSource;
+
     public bool gameOver;
     private int score;
     public Text gameOverText;
@@ -19,7 +21,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!instance) instance = this;
+
+
+        if (!instance)
+        {
+            audioSource = GetComponent<AudioSource>();
+            instance = this;
+        }
         else if (instance != this) Destroy(gameObject);
     }
 
@@ -58,6 +66,7 @@ public class GameManager : MonoBehaviour
 
         score++;
         scoreText.text = "score: " + score;
+        audioSource.Play();
     }
 
 
